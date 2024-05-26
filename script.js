@@ -10,7 +10,9 @@ function pokemonList()  {
             return response.json();
         })
         .then(data => {
-            return data.results;
+            return data.results.map((pokemon, index) => {
+                return { id: index + 1, name: pokemon.name};
+            });
         })
         .catch(error => {
             console.error("Error al realizar fetch de la lista de Pokémon:", error);
@@ -18,7 +20,7 @@ function pokemonList()  {
 }
 
 function populateSelect(pokemonList)    {
-    
+
     pokemonList.sort((a, b) => a.name.localeCompare(b.name));
 
     pokemonList.forEach(pokemon => {
