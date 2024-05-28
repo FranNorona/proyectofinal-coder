@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100'; // Cambia el límite según lo necesites
     const selectElement = document.getElementById("pokemon_select");
     const imgContainer = document.getElementById("imagenes_pokemon");
+    const statsContainer = document.getElementById("estadisticas_pokemon");
     const localStorageKey = "pokemonList";
 
     function fetchPokemonList() {
@@ -47,7 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function fetchPokemonDetails(pokemonUrl) {
         return fetch(pokemonUrl)
             .then(response => response.json())
-            .then(data => data.sprites.front_default)
+            .then(data => ({
+                imageUrl: data.sprites.front_default,
+                weight: data.weight,
+                height: data.height
+            }))
             .catch(error => {
                 console.error("Error al realizar fetch de los detalles del Pokémon:", error);
             });
@@ -65,12 +70,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function displayPokemonStats(weight, height) {
+        statsContainer.innerHTML = ''; // Limpiar cualquier estadística anterior
+        const weightElement = document.createElement("p");
+        weightElement.textContent = `Weight: ${weight} kg`;
+        const heightElement = document.createElement("p");
+        heightElement.textContent = `Height: ${height} m`;
+        statsContainer.appendChild(weightElement);
+        statsContainer.appendChild(heightElement);
+    }
+
     selectElement.addEventListener("change", (event) => {
         const pokemonUrl = event.target.value;
         if (pokemonUrl) {
-            fetchPokemonDetails(pokemonUrl).then(imageUrl => {
-                if (imageUrl) {
-                    displayPokemonImage(imageUrl);
+            fetchPokemonDetails(pokemonUrl).then(details => {
+                if (details) {
+                    displayPokemonImage(details.imageUrl);
+                    displayPokemonStats(details.weight, details.height);
                 }
             });
         }
