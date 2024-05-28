@@ -27,3 +27,15 @@
     align-items: center;
     width: 80%;
 }
+
+#imagenes_pokemon  {
+    height: 150px;
+    width: 150px;
+    background: red;
+}
+
+#imagenes_pokemon img   {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
