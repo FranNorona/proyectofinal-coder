@@ -1,24 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Inter:wght@200&family=Lato:wght@300&family=Nunito:wght@200;300&family=Open+Sans:wght@300&family=Roboto+Condensed:wght@600&family=Roboto:wght@100;300;400&family=Titan+One&display=swap');
+
 *   {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+h1 {
+    font-family: "Titan One", sans-serif;
+    font-size: 70px;
+}
+
+h2, h3 {
+    font-size: 25px;
 }
 
 .main_container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    height: 50vw;
+    background-image: url(./background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .form_container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     height: 450px;
     width: 350px;
-    border: 1px solid black;
+    border: 3px solid black;
+    border-radius: 20px;
 }
 
 .atributo_one, .atributo_two  {
@@ -29,12 +47,32 @@
 }
 
 #imagenes_pokemon  {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
 }
 
 #imagenes_pokemon img   {
     height: 100%;
     width: 100%;
     overflow: hidden;
+}
+
+#texts_container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+}
+
+#estadisticas_pokemon   {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15.5px;
+}
+
+#estadisticas_pokemon p     {
+    font-size: 16px;
+    font-weight: bold;
 }

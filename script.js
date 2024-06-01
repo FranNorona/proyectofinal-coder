@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectElement = document.getElementById("pokemon_select");
     const imgContainer = document.getElementById("imagenes_pokemon");
     const statsContainer = document.getElementById("estadisticas_pokemon");
+    const textsContainer = document.getElementById("title_container");
     const localStorageKey = "pokemonList";
 
     function fetchPokemonList() {
@@ -73,11 +74,21 @@ document.addEventListener("DOMContentLoaded", () => {
     function displayPokemonStats(weight, height) {
         statsContainer.innerHTML = ''; // Limpiar cualquier estadística anterior
         const weightElement = document.createElement("p");
-        weightElement.textContent = `Weight: ${weight} kg`;
+        weightElement.textContent = `${weight} kg`;
         const heightElement = document.createElement("p");
-        heightElement.textContent = `Height: ${height} m`;
+        heightElement.textContent = `${height} m`;
         statsContainer.appendChild(weightElement);
         statsContainer.appendChild(heightElement);
+    }
+
+    function updateVisibility(selection)    {
+        textsContainer.innerHTML = '';
+        const h2Element = document.createElement("h2");
+        h2Element.textContent = "Peso:";
+        const h3Element = document.createElement("h3");
+        h3Element.textContent = "Altura:";
+        textsContainer.appendChild(h2Element);
+        textsContainer.appendChild(h3Element);
     }
 
     selectElement.addEventListener("change", (event) => {
@@ -87,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (details) {
                     displayPokemonImage(details.imageUrl);
                     displayPokemonStats(details.weight, details.height);
+                    updateVisibility();
                 }
             });
         }
