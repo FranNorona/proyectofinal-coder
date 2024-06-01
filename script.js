@@ -91,6 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
         textsContainer.appendChild(h3Element);
     }
 
+    function resetPokemonInfo() {
+        statsContainer.innerHTML = '';
+        textsContainer.innerHTML = '';
+
+        imgContainer.innerHTML = '';
+        const imgElement = document.createElement("img");
+        imgElement.src = "./pikachu.png";
+        imgElement.al = "Pokemon Image";
+        imgContainer.appendChild(imgElement);
+    }
+
     selectElement.addEventListener("change", (event) => {
         const pokemonUrl = event.target.value;
         if (pokemonUrl) {
@@ -101,6 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     updateVisibility();
                 }
             });
+        } else {
+            resetPokemonInfo();
         }
     });
 
