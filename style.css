@@ -10,10 +10,13 @@
 h1 {
     font-family: "Titan One", sans-serif;
     font-size: 70px;
+    color: #ffcc03;
+    text-shadow: -3px 4px 1px #0070B6, -8px 8px #133169;
 }
 
 h2, h3 {
     font-size: 25px;
+    font-weight: bold;
 }
 
 .main_container {
@@ -26,6 +29,7 @@ h2, h3 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    z-index: -1;
 }
 
 .form_container {
@@ -33,10 +37,44 @@ h2, h3 {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+    place-content: space-evenly;
+    place-items: center;
     height: 450px;
     width: 350px;
-    border: 3px solid black;
+    border: 3px solid white;
     border-radius: 20px;
+    z-index: 100;
+}
+
+.form_container::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+    height: 130%;
+    animation: transitionborder 3s linear infinite;
+    transition: all 0.3s linear;
+    z-index: -1;
+}
+
+.form_container::after  {
+    content: '';
+    position: absolute;
+    background: #133169;
+    inset: 5px;
+    border-radius: 15px;
+    z-index: -1;
+}
+
+#pokemon_select {
+    width: 80%;
+    height: 40px;
+    border: 3px solid #ffcc03;
+    border-radius: 20px;
+    color: white;
+    background-color: #0070B6;
 }
 
 .atributo_one, .atributo_two  {
@@ -54,7 +92,7 @@ h2, h3 {
 #imagenes_pokemon img   {
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    filter: drop-shadow(7px 6px 2px black);
 }
 
 #texts_container {
@@ -62,6 +100,7 @@ h2, h3 {
     justify-content: space-evenly;
     align-items: center;
     width: 50%;
+    color: white;
 }
 
 #estadisticas_pokemon   {
@@ -69,10 +108,23 @@ h2, h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 15.5px;
 }
 
 #estadisticas_pokemon p     {
     font-size: 16px;
     font-weight: bold;
+}
+
+.text_superior  {
+    padding-top: 15px;
+}
+
+.text_inferior  {
+    margin-top: -1px;
+}
+
+@keyframes transitionborder {
+from {transform: rotate(0deg);}
+
+to {transform: rotate(360deg);}
 }

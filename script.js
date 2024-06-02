@@ -74,8 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function displayPokemonStats(weight, height) {
         statsContainer.innerHTML = ''; // Limpiar cualquier estadística anterior
         const weightElement = document.createElement("p");
+        weightElement.classList.add("text_superior");
         weightElement.textContent = `${weight} kg`;
         const heightElement = document.createElement("p");
+        heightElement.classList.add("text_inferior");
         heightElement.textContent = `${height} m`;
         statsContainer.appendChild(weightElement);
         statsContainer.appendChild(heightElement);
