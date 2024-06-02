@@ -1,7 +1,7 @@
 Swal.fire({
     title: "Bienvenido",
     text: "Este es mi proyecto final de coderhouse, espero que te guste.",
-    imageUrl: "./alertimg.png",
+    imageUrl: "./multimedia/alertimg.png",
     imageWidth: 350,
     imageHeight: 200,
     imageAlt: "Alert Image"
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         pokemonList.forEach(pokemon => {
             const optionElement = document.createElement("option");
-            optionElement.value = pokemon.url; // Usamos la URL para obtener los detalles del Pokémon
+            optionElement.value = pokemon.url;
             optionElement.textContent = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
             selectElement.appendChild(optionElement);
         });
@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => ({
                 imageUrl: data.sprites.front_default,
-                weight: data.weight,
-                height: data.height
+                weight: data.weight / 10,
+                height: data.height / 10
             }))
             .catch(error => {
                 console.error("Error al realizar fetch de los detalles del Pokémon:", error);
@@ -72,30 +72,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function displayPokemonImage(imageUrl) {
-        imgContainer.innerHTML = ''; // Limpiar cualquier imagen anterior
+        imgContainer.innerHTML = '';
         if (imageUrl) {
             const imgElement = document.createElement("img");
             imgElement.src = imageUrl;
             imgElement.alt = "Pokemon Image";
             imgContainer.appendChild(imgElement);
         } else {
-            imgContainer.textContent = 'No image available';
+            imgContainer.textContent = 'No hay imagen disponible';
         }
     }
 
     function displayPokemonStats(weight, height) {
-        statsContainer.innerHTML = ''; // Limpiar cualquier estadística anterior
+        statsContainer.innerHTML = '';
         const weightElement = document.createElement("p");
         weightElement.classList.add("text_superior");
-        weightElement.textContent = `${weight} kg`;
+        weightElement.textContent = `${weight.toFixed(1)} kg`;
         const heightElement = document.createElement("p");
         heightElement.classList.add("text_inferior");
-        heightElement.textContent = `${height} m`;
+        heightElement.textContent = `${height.toFixed(1)} m`;
         statsContainer.appendChild(weightElement);
         statsContainer.appendChild(heightElement);
     }
 
-    function updateVisibility(selection)    {
+    function updateVisibility()    {
         textsContainer.innerHTML = '';
         const h2Element = document.createElement("h2");
         h2Element.textContent = "Peso:";
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         imgContainer.innerHTML = '';
         const imgElement = document.createElement("img");
-        imgElement.src = "./pikachu.png";
+        imgElement.src = "./multimedia/pikachu.png";
         imgElement.alt = "Pokemon Image";
         imgContainer.appendChild(imgElement);
     }
@@ -134,10 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let pokemonList = getFromLocalStorage(localStorageKey);
 
     if (pokemonList) {
-        // Si hay datos en localStorage, usa esos datos
+        
         populateSelect(pokemonList);
     } else {
-        // Si no hay datos, busca la lista de Pokémon y guarda en localStorage
+        
         fetchPokemonList().then(fetchedPokemonList => {
             if (fetchedPokemonList) {
                 populateSelect(fetchedPokemonList);
