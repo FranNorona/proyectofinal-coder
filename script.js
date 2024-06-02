@@ -8,12 +8,14 @@ Swal.fire({
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100'; // Cambia el límite según lo necesites
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100';
     const selectElement = document.getElementById("pokemon_select");
     const imgContainer = document.getElementById("imagenes_pokemon");
     const statsContainer = document.getElementById("estadisticas_pokemon");
     const textsContainer = document.getElementById("title_container");
     const localStorageKey = "pokemonList";
+
+    let pokemonArray = [];
 
     function fetchPokemonList() {
         return fetch(apiUrl)
@@ -24,11 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.json();
             })
             .then(data => {
-                const pokemonList = data.results.map((pokemon) => {
-                    return { name: pokemon.name, url: pokemon.url };
-                });
-                saveToLocalStorage(localStorageKey, pokemonList);
-                return pokemonList;
+                pokemonArray = data.results.map(pokemon => ({
+                    name: pokemon.name,
+                    url: pokemon.url
+                }));
+                saveToLocalStorage(localStorageKey, pokemonArray);
+                return pokemonArray;
             })
             .catch(error => {
                 console.error("Error al realizar fetch de la lista de Pokémon:", error);
@@ -109,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imgContainer.innerHTML = '';
         const imgElement = document.createElement("img");
         imgElement.src = "./pikachu.png";
-        imgElement.al = "Pokemon Image";
+        imgElement.alt = "Pokemon Image";
         imgContainer.appendChild(imgElement);
     }
 
