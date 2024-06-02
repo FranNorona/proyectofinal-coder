@@ -1,3 +1,12 @@
+Swal.fire({
+    title: "Bienvenido",
+    text: "Este es mi proyecto final de coderhouse, espero que te guste.",
+    imageUrl: "./alertimg.png",
+    imageWidth: 350,
+    imageHeight: 200,
+    imageAlt: "Alert Image"
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100'; // Cambia el límite según lo necesites
     const selectElement = document.getElementById("pokemon_select");
